@@ -1,5 +1,5 @@
 CC = clang++
-CCFLAGS = -g --std=c++11 -I.
+CCFLAGS = -g -Wall --std=c++14 -I.
 LDFLAGS = -lcpprest -lglog
 
 SOURCES = $(wildcard *.cc)

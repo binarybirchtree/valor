@@ -2,4 +2,6 @@
 
 namespace vindicator {
 
+Element::~Element () {}
+
 }
