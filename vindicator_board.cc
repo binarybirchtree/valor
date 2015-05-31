@@ -3,6 +3,9 @@
 #include <algorithm>
 #include <cassert>
 #include <cmath>
+#include <map>
+#include <queue>
+#include <set>
 #include <sstream>
 #include <stdexcept>
 #include <vector>
@@ -10,6 +13,7 @@
 #include <glog/logging.h>
 
 #include <vindicator_elementfactory.h>
+#include <vindicator_priorityqueue.h>
 
 namespace vindicator {
 
@@ -62,8 +66,101 @@ public:
   }
 
   bool valid (const Coordinates & coordinates) const {
-    return coordinates.x < size_ && coordinates.y < size_;
+    return coordinates.first >= 0 && coordinates.second >= 0 && coordinates.first < size_ && coordinates.second < size_;
   }
+
+  std::shared_ptr<const Element> at (const Coordinates & coordinates) const {
+    throw_if_invalid(coordinates);
+    return board_[coordinates.first][coordinates.second];
+  }
+
+  Path shortest_path (const Coordinates & start, const Coordinates & destination) const {
+    throw_if_invalid(start);
+    throw_if_invalid(destination);
+
+    if (start == destination) {
+      return Path();
+    }
+
+    // Determine the shortest path using A* search.
+    struct Location {
+      Location (const Coordinates & coordinates, int total_cost = 0) : coordinates(coordinates), total_cost(total_cost) {}
+      Coordinates coordinates;
+      int total_cost;
+    };
+
+    struct CompareTotalCost {
+      bool operator () (const Location & a, const Location & b) {
+        return a.total_cost >= b.total_cost;
+      }
+    };
+
+    struct CompareCoordinates {
+      bool operator () (const Location & a, const Location & b) {
+        return a.coordinates < b.coordinates;
+      }
+    };
+
+    // Use the "Manhattan distance" as the heuristic, since diagonal moves are not allowed.
+    auto heuristic = [] (const Coordinates & start, const Coordinates & destination) {
+      return std::abs(start.first - destination.first) + std::abs(start.second - destination.second);
+    };
+
+    std::set<Coordinates> finished;
+    PriorityQueue<Location, CompareTotalCost, CompareCoordinates> tentative;
+    std::map<Coordinates, int> costs;
+    std::map<Coordinates, Coordinates> previous;
+
+    tentative.emplace(start, heuristic(start, destination));
+
+    // A* search loop.
+    while (!tentative.empty() && tentative.top().coordinates != destination) {
+      // Choose the best location out of those that have been assessed.
+      Coordinates current = tentative.top().coordinates;
+      tentative.pop();
+      finished.insert(current);
+
+      // Assess all passable neighbors.
+      for (Coordinates neighbor : passable_neighbors(current)) {
+        int cost = costs[current] + 1;
+
+        // Check if a path with a lower cost was found.
+        if (tentative.contains(neighbor) && cost < costs[neighbor]) {
+          tentative.erase(neighbor);
+        }
+
+        // Update values for this neighbor.
+        if (!tentative.contains(neighbor) && finished.find(neighbor) == finished.end()) {
+          costs[neighbor] = cost;
+          tentative.emplace(neighbor, cost + heuristic(neighbor, destination));
+          previous[neighbor] = current;
+        }
+      }
+    }
+
+    // Construct the shortest path (working backwards from the destination)
+    // by following the entries in the previous coordinates map.
+    Path path;
+    for (
+      Coordinates current = destination;
+      current != start;
+      current = previous[current]
+    ) {
+      if (previous.find(current) == previous.end()) {
+        LOG(WARNING) << "No path to destination found.";
+        return Path();
+      }
+      path.emplace_back(current);
+    }
+    std::reverse(path.begin(), path.end());
+    return path;
+  }
+
+private:
+  std::size_t size_;
+
+  typedef std::vector<std::shared_ptr<Element> > Row;
+  std::vector<Row> board_;
 
   ///
   /// @throws std::runtime_error if the provided coordinates are invalid for this board.
@@ -72,7 +169,7 @@ public:
     if (!valid(coordinates)) {
       std::stringstream message;
       message <<
-        "Coordinates " << coordinates <<
+        "Coordinates " << coordinates.first << ", " << coordinates.second <<
         " are invalid for a board of size " << size_
       << ".";
       LOG(ERROR) << message;
@@ -80,24 +177,22 @@ public:
     }
   }
 
-  std::shared_ptr<const Element> at (const Coordinates & coordinates) const {
-    throw_if_invalid(coordinates);
-    return board_[coordinates.x][coordinates.y];
+  ///
+  /// @param[in] coordinates Specified coordinates.
+  /// @return Set of coordinates that neighbor the specified coordinates and are passable.
+  ///
+  std::set<Coordinates> passable_neighbors (const Coordinates & coordinates) const {
+    std::set<Coordinates> output;
+    typedef std::pair<int, int> Offset;
+    static const std::set<Offset> offsets = { { 0, -1 }, { 1, 0 }, { 0, 1 }, { -1, 0 } };
+    for (const Offset & offset : offsets) {
+      Coordinates neighbor(coordinates.first + offset.first, coordinates.second + offset.second);
+      if (valid(neighbor) && board_[neighbor.first][neighbor.second]->passable()) {
+        output.emplace(neighbor);
+      }
+    }
+    return output;
   }
-
-  Board::Path shortest_path (const Coordinates & start, const Coordinates & destination) const {
-    throw_if_invalid(start);
-    throw_if_invalid(destination);
-
-    // Placeholder implementation.
-    return Path();
-  }
-
-private:
-  std::size_t size_;
-
-  typedef std::vector<std::shared_ptr<Element> > Row;
-  std::vector<Row> board_;
 };
 
 Board::Board (std::size_t size, const std::string & layout)

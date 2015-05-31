@@ -11,21 +11,8 @@ namespace vindicator {
 
 class Board {
 public:
-  struct Moves {
-    enum Value { STAY, NORTH, EAST, SOUTH, WEST };
-  };
-
-  typedef std::vector<Moves> Path;
-
-  struct Coordinates {
-    Coordinates (std::size_t x, std::size_t y) : x(x), y(y) {}
-    std::size_t x;
-    std::size_t y;
-    friend std::ostream & operator << (std::ostream & stream, const Coordinates & coordinates) {
-      stream << "(" << coordinates.x << ", " << coordinates.y << ")";
-      return stream;
-    }
-  };
+  typedef std::pair<int, int> Coordinates;
+  typedef std::vector<Coordinates> Path;
 
   Board (std::size_t size, const std::string & layout);
 

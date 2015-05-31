@@ -20,7 +20,7 @@ namespace {
 // and creates an element of the appropriate type.
 typedef std::unordered_map<char, std::function<std::shared_ptr<Element>(char)> > Mapping;
 
-static Mapping mapping = {
+static const Mapping mapping = {
   { ' ' , [] (char) { return std::make_shared<Clearing>(); } },
   { '#' , [] (char) { return std::make_shared<Obstacle>(); } },
   { '[' , [] (char) { return std::make_shared<Nourishment>(); } },

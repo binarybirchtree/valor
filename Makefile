@@ -8,9 +8,9 @@ OBJECTS = $(subst .cc,.o,$(SOURCES))
 TARGET = vindicator
 TESTS = tests
 
-.PHONY: all clean test
+.PHONY: all clean test $(TESTS)
 
-all: $(TARGET) $(TESTS)
+all: $(TARGET)
 
 $(TESTS):
 	$(MAKE) -C $@
