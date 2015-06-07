@@ -16,7 +16,7 @@ namespace vindicator {
 namespace {
 
 // This is a mapping from the first character of the type identifier (which determines the element type)
-// to a function which takes the second character of the type identifier (which is used to specialize certain types) 
+// to a function which takes the second character of the type identifier (which is used to specialize certain types)
 // and creates an element of the appropriate type.
 typedef std::unordered_map<char, std::function<std::shared_ptr<Element>(char)> > Mapping;
 
