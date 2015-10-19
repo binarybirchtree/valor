@@ -1,6 +1,6 @@
-CC = clang++
-CCFLAGS = -g -Wall --std=c++14 -Igtest -I..
-LDFLAGS = -lcpprest -lglog -Lgtest -lgtest -lpthread
+CXX = clang++
+CXXFLAGS = -std=c++14 -g -Wall -pedantic -Igtest -I..
+LDFLAGS = -lcpprest -lglog -Lgtest -lgtest -lpthread -lstdc++ -lm
 
 SOURCES = $(wildcard *.cc)
 OBJECTS = $(subst .cc,.o,$(SOURCES)) $(filter-out ../vindicator.o, $(wildcard ../*.o))
@@ -18,10 +18,10 @@ gtest_libraries: gtest
 	cd $^ && cmake . && make
 
 vindicator_tests: $(OBJECTS)
-	$(CC) -o $@ $^ $(LDFLAGS)
+	$(CXX) -o $@ $^ $(LDFLAGS)
 
 %.o: %.cc
-	$(CC) $(CCFLAGS) -c -o $@ $<
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 clean:
 	rm -rf $(OBJECTS) $(TESTS) gtest

@@ -1,0 +1,61 @@
+language: cpp
+
+dist: trusty
+
+sudo: required
+
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    - llvm-toolchain-precise-3.6
+    - llvm-toolchain-precise-3.7
+    packages:
+    - g++-4.9
+    - g++-5
+    - clang-3.6
+    - clang-3.7
+    - cmake
+    - libgtest-dev
+    - libboost-all-dev
+  # - libcpprest-dev
+  # - libgoogle-glog-dev
+
+matrix:
+  include:
+  - compiler: gcc
+    env: COMPILER=g++-4.9
+
+  - compiler: gcc
+    env: COMPILER=g++-5
+
+  - compiler: clang
+    env: COMPILER=clang++-3.6
+
+  - compiler: clang
+    env: COMPILER=clang++-3.7
+
+install:
+- >
+  git clone https://github.com/google/glog.git
+  && pushd glog
+  && git checkout tags/v0.3.4
+  && ./configure CXX=$COMPILER
+  && make -j8
+  && sudo make install
+  && while popd; do : ; done
+- >
+  git clone https://github.com/Microsoft/cpprestsdk.git
+  && pushd cpprestsdk
+  && git checkout tags/v2.6.0
+  && mkdir Release/build
+  && pushd Release/build
+  && CXX=g++-5 cmake .. -DCMAKE_BUILD_TYPE=Release
+  && make -j8
+  && sudo make install
+  && while popd; do : ; done
+- sudo ldconfig
+
+script:
+- make CXX=$COMPILER -j8
+- make test CXX=$COMPILER -j8

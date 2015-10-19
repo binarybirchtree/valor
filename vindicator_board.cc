@@ -66,7 +66,10 @@ public:
   }
 
   bool valid (const Coordinates & coordinates) const {
-    return coordinates.first >= 0 && coordinates.second >= 0 && coordinates.first < size_ && coordinates.second < size_;
+    return coordinates.first >= 0
+        && coordinates.first < static_cast<int>(size_)
+        && coordinates.second >= 0
+        && coordinates.second < static_cast<int>(size_);
   }
 
   std::shared_ptr<const Element> at (const Coordinates & coordinates) const {
@@ -172,7 +175,7 @@ private:
         "Coordinates " << coordinates.first << ", " << coordinates.second <<
         " are invalid for a board of size " << size_
       << ".";
-      LOG(ERROR) << message;
+      LOG(ERROR) << message.str();
       throw std::runtime_error(message.str());
     }
   }

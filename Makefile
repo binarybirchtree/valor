@@ -1,6 +1,6 @@
-CC = clang++
-CCFLAGS = -g -Wall --std=c++14 -I.
-LDFLAGS = -lcpprest -lglog
+CXX = clang++
+CXXFLAGS = -std=c++14 -g -Wall -pedantic -I.
+LDFLAGS = -lcpprest -lglog -lstdc++ -lm
 
 SOURCES = $(wildcard *.cc)
 OBJECTS = $(subst .cc,.o,$(SOURCES))
@@ -16,10 +16,10 @@ $(TESTS):
 	$(MAKE) -C $@
 
 vindicator: $(OBJECTS)
-	$(CC) -o $@ $^ $(LDFLAGS)
+	$(CXX) -o $@ $^ $(LDFLAGS)
 
 %.o: %.cc
-	$(CC) $(CCFLAGS) -c -o $@ $<
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 clean:
 	rm -f $(OBJECTS) $(TARGET) && \
