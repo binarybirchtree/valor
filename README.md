@@ -1,28 +1,33 @@
-# Valor
+Valor
+=====
 
 [![Build Status](https://travis-ci.org/binarybirchtree/valor.svg)](https://travis-ci.org/binarybirchtree/valor)
 
 A C++ framework for [Vindinium](http://vindinium.org).
 
-## Building
+## Instructions
 
-*  Install dependencies.
+* Install Bazel.
 
-   ```Shell
-   sudo apt-get install clang make cmake libcpprest-dev libgoogle-glog-dev libgtest-dev
-   ```
+  See the official installation instructions at https://bazel.io/docs/install.html.
 
-*  Build.
+* Install dependency libraries.
 
-   ```Shell
-   make
-   ```
+  ```Shell
+  sudo apt-get install libcpprest-dev libgoogle-glog-dev
+  ```
 
-*  Run tests.
+* Build the Valor library.
 
-   ```Shell
-   make test
-   ```
+  ```Shell
+  bazel build valor
+  ```
+
+* Run the unit tests.
+
+  ```Shell
+  bazel test --test_output=all tests
+  ```
 
 ## Author
 
