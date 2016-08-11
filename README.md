@@ -1,8 +1,8 @@
-# Vindicator
+# Valor
 
-[![Build Status](https://travis-ci.org/binarybirchtree/vindicator.svg)](https://travis-ci.org/binarybirchtree/vindicator)
+[![Build Status](https://travis-ci.org/binarybirchtree/valor.svg)](https://travis-ci.org/binarybirchtree/valor)
 
-An AI for [Vindinium](http://vindinium.org) that explores the use of HTTP APIs with C++.
+A C++ framework for [Vindinium](http://vindinium.org).
 
 ## Building
 

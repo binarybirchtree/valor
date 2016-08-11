@@ -1,11 +1,11 @@
 CXX = clang++
 CXXFLAGS = -std=c++14 -g -Wall -pedantic -Igtest -I..
-LDFLAGS = -lcpprest -lglog -Lgtest -lgtest -lpthread -lstdc++ -lm
+LDFLAGS = -lcpprest -lssl -lcrypto -lboost_system -lglog -Lgtest -lgtest -lpthread -lstdc++ -lm
 
 SOURCES = $(wildcard *.cc)
-OBJECTS = $(subst .cc,.o,$(SOURCES)) $(filter-out ../vindicator.o, $(wildcard ../*.o))
+OBJECTS = $(subst .cc,.o,$(SOURCES)) $(filter-out ../valor.o, $(wildcard ../*.o))
 
-TESTS = vindicator_tests
+TESTS = valor_tests
 
 .PHONY: all clean test
 
@@ -17,7 +17,7 @@ gtest:
 gtest_libraries: gtest
 	cd $^ && cmake . && make
 
-vindicator_tests: $(OBJECTS)
+valor_tests: $(OBJECTS)
 	$(CXX) -o $@ $^ $(LDFLAGS)
 
 %.o: %.cc

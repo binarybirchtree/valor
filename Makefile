@@ -1,11 +1,11 @@
 CXX = clang++
 CXXFLAGS = -std=c++14 -g -Wall -pedantic -I.
-LDFLAGS = -lcpprest -lglog -lstdc++ -lm
+LDFLAGS = -lcpprest -lssl -lcrypto -lboost_system -lglog -lstdc++ -lm
 
 SOURCES = $(wildcard *.cc)
 OBJECTS = $(subst .cc,.o,$(SOURCES))
 
-TARGET = vindicator
+TARGET = valor
 TESTS = tests
 
 .PHONY: all clean test $(TESTS)
@@ -15,7 +15,7 @@ all: $(TARGET)
 $(TESTS):
 	$(MAKE) -C $@
 
-vindicator: $(OBJECTS)
+valor: $(OBJECTS)
 	$(CXX) -o $@ $^ $(LDFLAGS)
 
 %.o: %.cc
