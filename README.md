@@ -32,3 +32,7 @@ A C++ framework for [Vindinium](http://vindinium.org).
 ## Author
 
 Binary Birch Tree
+
+## License
+
+[GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.html)
