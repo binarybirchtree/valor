@@ -1,0 +1,6 @@
+{
+  "key": "abcdefgh",
+  "server": "http://localhost:9000",
+  "path": "api/training",
+  "turns": 100
+}
