@@ -1,0 +1,8 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classvalor_1_1Element.html" title="Interface for board elements. " alt="" coords="5,107,112,133"/>
+<area shape="rect" id="node2" href="$classvalor_1_1Clearing.html" title="Representation of a Clearing&#45;type board element. " alt="" coords="173,5,279,32"/>
+<area shape="rect" id="node3" href="$classvalor_1_1Contestant.html" title="Representation of a Contestant&#45;type board element. " alt="" coords="165,56,287,83"/>
+<area shape="rect" id="node4" href="$classvalor_1_1Nourishment.html" title="Representation of a Nourishment&#45;type board element. " alt="" coords="160,107,292,133"/>
+<area shape="rect" id="node5" href="$classvalor_1_1Obstacle.html" title="Representation of an Obstacle&#45;type board element. " alt="" coords="171,157,281,184"/>
+<area shape="rect" id="node6" href="$classvalor_1_1Resource.html" title="Representation of a Resource&#45;type board element. " alt="" coords="169,208,283,235"/>
+</map>

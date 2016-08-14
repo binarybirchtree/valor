@@ -1,0 +1,7 @@
+<map id="valor::Element" name="valor::Element">
+<area shape="rect" id="node2" href="$classvalor_1_1Clearing.html" title="Representation of a Clearing&#45;type board element. " alt="" coords="5,80,112,107"/>
+<area shape="rect" id="node3" href="$classvalor_1_1Contestant.html" title="Representation of a Contestant&#45;type board element. " alt="" coords="136,80,259,107"/>
+<area shape="rect" id="node4" href="$classvalor_1_1Nourishment.html" title="Representation of a Nourishment&#45;type board element. " alt="" coords="283,80,415,107"/>
+<area shape="rect" id="node5" href="$classvalor_1_1Obstacle.html" title="Representation of an Obstacle&#45;type board element. " alt="" coords="439,80,550,107"/>
+<area shape="rect" id="node6" href="$classvalor_1_1Resource.html" title="Representation of a Resource&#45;type board element. " alt="" coords="575,80,689,107"/>
+</map>
