@@ -21,6 +21,9 @@
 
 namespace valor {
 
+///
+/// Encapsulates configuration data and parsing logic.
+///
 class Configuration {
 public:
   ///

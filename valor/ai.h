@@ -26,6 +26,9 @@ namespace valor {
 
 using namespace web;
 
+///
+/// Interface for decision-making AIs.
+///
 class AI {
 public:
   virtual ~AI ();

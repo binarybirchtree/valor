@@ -24,6 +24,9 @@
 
 namespace valor {
 
+///
+/// Representation of a Resource-type board element.
+///
 class Resource : public Element {
 public:
   Resource (int owner_id);

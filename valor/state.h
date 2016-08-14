@@ -28,6 +28,9 @@ namespace valor {
 
 using namespace web;
 
+///
+/// Representation of the simulation state.
+///
 class State {
 public:
   ///

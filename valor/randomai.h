@@ -27,6 +27,9 @@ namespace valor {
 
 using namespace web;
 
+///
+/// Simple AI that makes completely random decisions.
+///
 class RandomAI : public AI {
 public:
   virtual Direction decide (const State & state);

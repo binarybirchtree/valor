@@ -29,6 +29,9 @@ namespace valor {
 
 using namespace web;
 
+///
+/// Vindinium HTTP API client.
+///
 class Client {
 public:
   ///

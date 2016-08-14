@@ -23,6 +23,9 @@
 
 namespace valor {
 
+///
+/// Representation of an Obstacle-type board element.
+///
 class Obstacle : public Element {
 public:
   virtual bool passable () const;

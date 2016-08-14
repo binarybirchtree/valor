@@ -23,6 +23,9 @@
 
 namespace valor {
 
+///
+/// Representation of a Nourishment-type board element.
+///
 class Nourishment : public Element {
 public:
   virtual bool passable () const;

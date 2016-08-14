@@ -23,6 +23,9 @@
 
 namespace valor {
 
+///
+/// Representation of a Clearing-type board element.
+///
 class Clearing : public Element {
 public:
   virtual bool passable () const;

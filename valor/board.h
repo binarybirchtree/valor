@@ -25,6 +25,9 @@
 
 namespace valor {
 
+///
+/// Encapsulates data and logic related to a Vindinium board.
+///
 class Board {
 public:
   typedef std::pair<int, int> Coordinates;

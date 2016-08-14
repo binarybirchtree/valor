@@ -19,6 +19,9 @@
 
 namespace valor {
 
+///
+/// Interface for board elements.
+///
 class Element {
 public:
   virtual ~Element ();

@@ -23,6 +23,9 @@
 
 namespace valor {
 
+///
+/// Top-level component of the Valor API.
+///
 class Engine {
 public:
   ///

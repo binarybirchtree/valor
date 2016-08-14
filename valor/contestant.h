@@ -23,6 +23,9 @@
 
 namespace valor {
 
+///
+/// Representation of a Contestant-type board element.
+///
 class Contestant : public Element {
 public:
   Contestant (int id);

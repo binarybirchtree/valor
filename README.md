@@ -5,6 +5,8 @@ Valor
 
 A C++ framework for [Vindinium](http://vindinium.org).
 
+[Doxygen documentation](https://binarybirchtree.github.io/valor/annotated.html)
+
 ## Building the library
 
 ### Install Bazel

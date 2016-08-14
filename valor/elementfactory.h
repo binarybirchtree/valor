@@ -25,6 +25,9 @@
 
 namespace valor {
 
+///
+/// Encapsulates logic for parsing textual representations of board elements.
+///
 class ElementFactory {
 public:
   static const int TYPE_SIZE = 2;
