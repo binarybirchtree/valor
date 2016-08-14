@@ -1,61 +1,23 @@
 language: cpp
-
 dist: trusty
-
 sudo: required
 
 addons:
   apt:
     sources:
-    - ubuntu-toolchain-r-test
-    - llvm-toolchain-precise-3.6
-    - llvm-toolchain-precise-3.7
+    - sourceline: deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8
+      key_url: https://storage.googleapis.com/bazel-apt/doc/apt-key.pub.gpg
+    - sourceline: deb http://us.archive.ubuntu.com/ubuntu/ xenial main universe
     packages:
-    - g++-4.9
-    - g++-5
-    - clang-3.6
-    - clang-3.7
-    - cmake
-    - libgtest-dev
-    - libboost-all-dev
-  # - libcpprest-dev
-  # - libgoogle-glog-dev
-
-matrix:
-  include:
-  - compiler: gcc
-    env: COMPILER=g++-4.9
-
-  - compiler: gcc
-    env: COMPILER=g++-5
-
-  - compiler: clang
-    env: COMPILER=clang++-3.6
-
-  - compiler: clang
-    env: COMPILER=clang++-3.7
-
-install:
-- >
-  git clone https://github.com/google/glog.git
-  && pushd glog
-  && git checkout tags/v0.3.4
-  && ./configure CXX=$COMPILER
-  && make -j8
-  && sudo make install
-  && while popd; do : ; done
-- >
-  git clone https://github.com/Microsoft/cpprestsdk.git
-  && pushd cpprestsdk
-  && git checkout tags/v2.6.0
-  && mkdir Release/build
-  && pushd Release/build
-  && CXX=g++-5 cmake .. -DCMAKE_BUILD_TYPE=Release
-  && make -j8
-  && sudo make install
-  && while popd; do : ; done
-- sudo ldconfig
+    - bazel
+    - g++
+    - libboost-program-options-dev
+    - libcpprest-dev
+    - libgflags-dev
+    - libgflags2v5
+    - libgoogle-glog-dev
+    - libgoogle-glog0v5
 
 script:
-- make CXX=$COMPILER -j8
-- make test CXX=$COMPILER -j8
+- bazel test --test_output=all tests
+- bazel build example
