@@ -40,6 +40,10 @@ public:
   ///
   Client (const std::string & server, const std::string & key);
 
+  Client (Client &&);
+  Client & operator = (Client &&);
+  ~Client ();
+
   ///
   /// Sends the starting request to the server.
   ///
@@ -61,7 +65,7 @@ public:
 
 private:
   class Implementation;
-  std::shared_ptr<Implementation> impl_;
+  std::unique_ptr<Implementation> impl_;
 };
 
 }

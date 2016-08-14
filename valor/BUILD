@@ -18,5 +18,6 @@ cc_library(
   name = 'valor',
   srcs = glob(['*.cc']),
   hdrs = glob(['*.h']),
+  copts = ['-std=c++14'],
   visibility = ['//visibility:public'],
 )

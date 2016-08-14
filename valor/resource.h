@@ -31,6 +31,10 @@ class Resource : public Element {
 public:
   Resource (int owner_id);
 
+  Resource (Resource &&);
+  Resource & operator = (Resource &&);
+  ~Resource ();
+
   virtual bool passable () const;
   virtual bool nourishing () const;
   virtual bool bountiful () const;
@@ -39,7 +43,7 @@ public:
 
 private:
   class Implementation;
-  std::shared_ptr<Implementation> impl_;
+  std::unique_ptr<Implementation> impl_;
 };
 
 }

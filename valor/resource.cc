@@ -30,7 +30,11 @@ private:
   int owner_;
 };
 
-Resource::Resource (int owner) : impl_(std::make_shared<Implementation>(owner)) {}
+Resource::Resource (int owner) : impl_(std::make_unique<Implementation>(owner)) {}
+
+Resource::Resource (Resource &&) = default;
+Resource & Resource::operator = (Resource &&) = default;
+Resource::~Resource () = default;
 
 bool Resource::passable () const {
   return false;

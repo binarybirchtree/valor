@@ -31,6 +31,12 @@ public:
   ///
   Configuration (const std::string & file_path = "config.json");
 
+  Configuration (const Configuration & configuration);
+  Configuration & operator = (Configuration configuration);
+  Configuration (Configuration &&);
+  Configuration & operator = (Configuration &&);
+  ~Configuration ();
+
   ///
   /// @return Server to connect to.
   ///
@@ -53,7 +59,7 @@ public:
 
 private:
   class Implementation;
-  std::shared_ptr<Implementation> impl_;
+  std::unique_ptr<Implementation> impl_;
 };
 
 }

@@ -215,7 +215,11 @@ private:
 };
 
 Board::Board (std::size_t size, const std::string & layout)
-: impl_(std::make_shared<Implementation>(size, layout)) {}
+: impl_(std::make_unique<Implementation>(size, layout)) {}
+
+Board::Board (Board &&) = default;
+Board & Board::operator = (Board &&) = default;
+Board::~Board () = default;
 
 std::size_t Board::size () const {
   return impl_->size();

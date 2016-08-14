@@ -49,7 +49,13 @@ To use the public Vindinium server:
 
 * Update the `key` and `server` values in `example/config.json` accordingly.
 
-### Run the client
+### Install the Boost `program_options` library and headers
+
+```Shell
+sudo apt install libboost-program-options-dev
+```
+
+### Build and run the example client
 
 ```Shell
 bazel run example $(readlink -f example/config.json)

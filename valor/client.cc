@@ -77,7 +77,11 @@ private:
 };
 
 Client::Client (const std::string & server, const std::string & key)
-: impl_(std::make_shared<Implementation>(server, key)) {}
+: impl_(std::make_unique<Implementation>(server, key)) {}
+
+Client::Client (Client &&) = default;
+Client & Client::operator = (Client &&) = default;
+Client::~Client () = default;
 
 State Client::start (const std::string & path, int turns, const std::string & board) const {
   return impl_->start(path, turns, board);

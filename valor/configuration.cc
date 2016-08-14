@@ -59,7 +59,20 @@ private:
   json::value data_;
 };
 
-Configuration::Configuration (const std::string & file_path) : impl_(std::make_shared<Implementation>(file_path)) {}
+Configuration::Configuration (const std::string & file_path)
+: impl_(std::make_unique<Implementation>(file_path)) {}
+
+Configuration::Configuration (const Configuration & configuration)
+: impl_(std::make_unique<Implementation>(*configuration.impl_)) {}
+
+Configuration & Configuration::operator = (Configuration configuration) {
+  this->impl_.swap(configuration.impl_);
+  return *this;
+}
+
+Configuration::Configuration (Configuration &&) = default;
+Configuration & Configuration::operator = (Configuration &&) = default;
+Configuration::~Configuration () = default;
 
 std::string Configuration::server () const {
   return impl_->server();

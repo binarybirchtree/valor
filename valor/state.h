@@ -38,6 +38,10 @@ public:
   ///
   State (const json::value & value);
 
+  State (State &&);
+  State & operator = (State &&);
+  ~State ();
+
   ///
   /// @return JSON representation of the state.
   ///
@@ -60,7 +64,7 @@ public:
 
 private:
   class Implementation;
-  std::shared_ptr<Implementation> impl_;
+  std::unique_ptr<Implementation> impl_;
 };
 
 }

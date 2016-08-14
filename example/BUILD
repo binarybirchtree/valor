@@ -25,8 +25,5 @@ cc_binary(
     '-lboost_system',
     '-lboost_program_options',
     '-lglog',
-    '-lgflags',
-    '-lstdc++',
-    '-lm',
   ],
 )

@@ -35,6 +35,10 @@ public:
 
   Board (std::size_t size, const std::string & layout);
 
+  Board (Board &&);
+  Board & operator = (Board &&);
+  ~Board ();
+
   ///
   /// @return Size of the board.
   ///
@@ -63,7 +67,7 @@ public:
 
 private:
   class Implementation;
-  std::shared_ptr<Implementation> impl_;
+  std::unique_ptr<Implementation> impl_;
 };
 
 }

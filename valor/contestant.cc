@@ -30,7 +30,11 @@ private:
   int id_;
 };
 
-Contestant::Contestant (int id) : impl_(std::make_shared<Implementation>(id)) {}
+Contestant::Contestant (int id) : impl_(std::make_unique<Implementation>(id)) {}
+
+Contestant::Contestant (Contestant &&) = default;
+Contestant & Contestant::operator = (Contestant &&) = default;
+Contestant::~Contestant () = default;
 
 bool Contestant::passable () const {
   return false;

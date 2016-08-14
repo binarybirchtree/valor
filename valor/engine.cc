@@ -55,7 +55,11 @@ private:
   const Configuration config_;
 };
 
-Engine::Engine (const Configuration & config) : impl_(std::make_shared<Implementation>(config)) {}
+Engine::Engine (const Configuration & config) : impl_(std::make_unique<Implementation>(config)) {}
+
+Engine::Engine (Engine &&) = default;
+Engine & Engine::operator = (Engine &&) = default;
+Engine::~Engine () = default;
 
 void Engine::run () const {
   try {

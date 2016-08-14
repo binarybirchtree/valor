@@ -36,8 +36,6 @@ cc_test(
     '-lcrypto',
     '-lboost_system',
     '-lglog',
-    '-lstdc++',
-    '-lm',
   ],
   timeout = 'short',
 )

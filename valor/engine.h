@@ -33,6 +33,10 @@ public:
   ///
   Engine (const Configuration & config);
 
+  Engine (Engine &&);
+  Engine & operator = (Engine &&);
+  ~Engine ();
+
   ///
   /// Runs one round of the simulation.
   ///
@@ -40,7 +44,7 @@ public:
 
 private:
   class Implementation;
-  std::shared_ptr<Implementation> impl_;
+  std::unique_ptr<Implementation> impl_;
 };
 
 }

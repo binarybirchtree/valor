@@ -46,7 +46,11 @@ private:
   const json::value value_;
 };
 
-State::State (const json::value & value) : impl_(std::make_shared<Implementation>(value)) {}
+State::State (const json::value & value) : impl_(std::make_unique<Implementation>(value)) {}
+
+State::State (State &&) = default;
+State & State::operator = (State &&) = default;
+State::~State () = default;
 
 const json::value & State::json () const {
   return impl_->json();
