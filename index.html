@@ -99,7 +99,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>Obtain an API key from <a href="http://vindinium.org/register">http://vindinium.org/register</a>.</li>
 <li>Update the <code>key</code> and <code>server</code> values in <code>example/config.json</code> accordingly.</li>
 </ul>
-<h3>Run the client</h3>
+<h3>Install the Boost <code>program_options</code> library and headers</h3>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;sudo apt install libboost-program-options-dev</div></div><!-- fragment --><h3>Build and run the example client</h3>
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;bazel run example $(readlink -f example/config.json)</div></div><!-- fragment --><h3>View the simulation</h3>
 <p>Upon successfully starting a new simulation, the example client will output the corresponding URL in the following format:</p>
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;View URL: http://localhost:9000/abcdefgh</div></div><!-- fragment --><h2>Author</h2>
