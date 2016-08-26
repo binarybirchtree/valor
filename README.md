@@ -1,7 +1,8 @@
 Valor
 =====
 
-[![Build Status](https://travis-ci.org/binarybirchtree/valor.svg)](https://travis-ci.org/binarybirchtree/valor)
+[![Travis CI](https://img.shields.io/travis/binarybirchtree/valor.svg)](https://travis-ci.org/binarybirchtree/valor)
+[![License](https://img.shields.io/badge/license-GNU General Public License v3.0-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
 
 A C++ framework for [Vindinium](http://vindinium.org).
 
@@ -72,7 +73,3 @@ View URL: http://localhost:9000/abcdefgh
 ## Author
 
 Binary Birch Tree
-
-## License
-
-[GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.html)
